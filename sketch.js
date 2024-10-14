@@ -1,58 +1,50 @@
-let posX, posY;
-let velX, velY;
-let diam;
-let rad;
-let bgColor;
+let fonditoDeColorin;
+let pelotas = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
-  rad = ceil(random(80, 25));
-  diam = rad * 2;
-
-  posX = random(rad, width - rad);
-  posY = random(rad, height - rad);
-
-  velX = random(20);
-  velY = random(20);
-  bgColor = color(100, 100, 255); // Color inicial de fondo (azul)
+  fonditoDeColorin = color(random(100, 255), random(100), random(255));
+  for (let i = 0; i < 100; i++) {
+    let nuevaPelota = new Pelota();
+    pelotas.push(nuevaPelota);
+  }
 }
 
 function draw() {
-  background(bgColor);
-  fill(255);
-  noStroke();
-
-  posX += velX;
-  posY += velY;
-
-  // Verifica si el círculo toca el borde derecho o izquierdo
-  if (posX > width - rad || posX < rad) {
-    velX *= -1; // Invierte la dirección en X
-    cambiarColorFondo(); // Cambia el fondo a un color frío
+  background(fonditoDeColorin);
+  for (let i = 0; i < 100; i++) {
+    pelotas[i].update();
+    pelotas[i].display();
   }
-
-  // Verifica si el círculo toca el borde inferior o superior
-  if (posY > height - rad || posY < rad) {
-    velY *= -1; // Invierte la dirección en Y
-    cambiarColorFondo(); // Cambia el fondo a un color frío
-  }
-
-  circle(posX, posY, diam);
 }
 
-function cambiarColorFondo() {
-  // Define una lista de colores fríos
-  const coloresFrios = [
-    color(0, 0, 255), // Azul
-    color(0, 128, 255), // Azul claro
-    color(0, 255, 255), // Cian
-    color(0, 255, 128), // Verde agua
-    color(128, 0, 255), // Púrpura
-    color(64, 224, 208), // Turquesa
-    color(0, 102, 204), // Azul oscuro
-  ];
+class Pelota {
+  // Plano de instrucciones para creae una pelota
+  constructor() {
+    this.rad = ceil(random(5, 30));
+    this.diam = this.rad * 2;
+    this.posX = random(this.rad, width - this.rad);
+    this.posY = random(this.rad, height - this.rad);
+    this.velX = random(-10, 10);
+    this.velY = random(-10, 10);
+    console.log("estoy viaaaaa!");
+  }
+  // método update
+  update() {
+    this.posX += this.velX;
+    this.posY += this.velY;
 
-  // Cambia el color de fondo a uno aleatorio de la lista
-  bgColor = random(coloresFrios);
+    if (this.posX > width - this.rad || this.posX < this.rad) {
+      this.velX *= -1;
+    }
+    if (this.posY > height - this.rad || this.posY < this.rad) {
+      this.velY *= -1;
+    }
+  }
+
+  display() {
+    fill(255);
+    noStroke();
+    circle(this.posX, this.posY, this.diam);
+  }
 }

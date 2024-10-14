@@ -8,3 +8,7 @@ if (posY > height - rad || posY < rad) {
     cambiarColorFondo(); // Cambia el fondo a un color frío
   }
 ```
+
+Un array
+
+Class debe estar con mayuscula y además debe llevar un constructor dentro del bloque
