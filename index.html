@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- Elemento principal del documento HTML. El atributo "lang" indica el idioma del contenido, en este caso, inglés. -->
+
   <head>
-    <meta charset="UTF-8" />
+    <!-- El encabezado de la página, donde se coloca la configuración de metadatos y enlaces externos. -->
+
+    <meta charset="utf-8" />
+    <!-- Define el conjunto de caracteres utilizados en el documento como UTF-8, lo que permite mostrar caracteres especiales y varios idiomas. -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.0/lib/p5.min.js"></script>
-    <title>Document</title>
+    <!-- Configura la vista para que el sitio sea responsivo. El ancho de la página se ajusta al ancho del dispositivo y el zoom inicial es del 100%. -->
+
+    <title>Sketch</title>
+    <!-- El título de la página que aparece en la pestaña del navegador. -->
+
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- Enlace a un archivo CSS externo para aplicar estilos personalizados a la página. El archivo "style.css" debe estar en el mismo directorio o en una ruta específica. -->
+
+    <script src="libraries/p5.min.js"></script>
+    <!-- Enlace al archivo de la biblioteca p5.js, que se utiliza para crear gráficos y animaciones en el navegador. Este archivo debe estar en una carpeta "libraries". -->
+
+    <!-- <script src="libraries/p5.sound.min.js"></script> -->
+    <!-- Este es un enlace comentado a la biblioteca p5.sound.js, que proporciona funciones para trabajar con audio. Al estar comentado, no se carga en la página, pero puede activarse si se elimina el comentario. -->
   </head>
+
   <body>
+    <!-- El cuerpo de la página, donde se coloca el contenido visible y los scripts principales. -->
+
     <script src="classes/Particula.js"></script>
+    <!-- Enlace al archivo JavaScript "Particula.js" que contiene la clase Particula. Debe estar en una carpeta llamada "classes". -->
+
     <script src="sketch.js"></script>
+    <!-- Enlace al archivo principal "sketch.js", que controla el funcionamiento y la lógica del proyecto p5.js. -->
   </body>
 </html>

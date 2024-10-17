@@ -1,50 +1,28 @@
-let fonditoDeColorin;
-let pelotas = [];
+let particulas = []; // Array para almacenar las partículas activas.
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  fonditoDeColorin = color(random(100, 255), random(100), random(255));
-  for (let i = 0; i < 100; i++) {
-    let nuevaPelota = new Pelota();
-    pelotas.push(nuevaPelota);
-  }
+  createCanvas(windowWidth, windowHeight); // Crear un lienzo que ocupe toda la ventana.
 }
 
 function draw() {
-  background(fonditoDeColorin);
-  for (let i = 0; i < 100; i++) {
-    pelotas[i].update();
-    pelotas[i].display();
-  }
-}
+  background(50, 50, 50, 50); // Fondo gris oscuro con un poco de opacidad para simular humo.
 
-class Pelota {
-  // Plano de instrucciones para creae una pelota
-  constructor() {
-    this.rad = ceil(random(5, 30));
-    this.diam = this.rad * 2;
-    this.posX = random(this.rad, width - this.rad);
-    this.posY = random(this.rad, height - this.rad);
-    this.velX = random(-10, 10);
-    this.velY = random(-10, 10);
-    console.log("estoy viaaaaa!");
-  }
-  // método update
-  update() {
-    this.posX += this.velX;
-    this.posY += this.velY;
+  // Crear una nueva partícula en la posición actual del mouse.
+  let nuevaParticula = new Particula(mouseX, mouseY);
+  particulas.push(nuevaParticula); // Agregar la nueva partícula al array.
 
-    if (this.posX > width - this.rad || this.posX < this.rad) {
-      this.velX *= -1;
-    }
-    if (this.posY > height - this.rad || this.posY < this.rad) {
-      this.velY *= -1;
+  // Actualizar y dibujar cada partícula.
+  for (let i = 0; i < particulas.length; i++) {
+    particulas[i].update(); // Actualizar posición y estado de la partícula.
+    particulas[i].display(); // Dibujar la partícula.
+  }
+
+  // Eliminar las partículas "muertas" del array.
+  for (let i = particulas.length - 1; i >= 0; i--) {
+    if (!particulas[i].estaViva) {
+      particulas.splice(i, 1); // Remover la partícula si ya no está "viva".
     }
   }
 
-  display() {
-    fill(255);
-    noStroke();
-    circle(this.posX, this.posY, this.diam);
-  }
+  console.log(particulas.length); // Mostrar en la consola la cantidad de partículas activas.
 }
