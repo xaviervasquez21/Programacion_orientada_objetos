@@ -6,18 +6,20 @@ class Particula {
     this.tVida = round(random(20, 100)); // Tiempo de vida aleatorio entre 20 y 100 fotogramas.
     this.tamano = 20; // Tamaño inicial de la partícula.
 
-    // Definir colores aleatorios dentro de un rango para simular fuego.
-    this.color = color(
-      random(200, 255), // Rojo intenso.
-      random(100, 200), // Naranja medio.
-      random(0, 100) // Amarillo bajo.
-    );
+    // Definir colores de inicio y fin para el fuego.
+    this.colorInicial = color(255, 255, 0); // Amarillo al inicio.
+    this.colorFinal = color(255, 0, 0); // Rojo al final.
   }
 
   update() {
     this.tVida -= 1; // Reducir el tiempo de vida en cada fotograma.
     if (this.tVida <= 0) {
       this.estaViva = false; // Marcar la partícula como "muerta" si su tiempo de vida se acaba.
+      return;
+    }
+
+    if (this.posy < this.tamano / 2) {
+      this.estaViva = false;
       return;
     }
 
@@ -30,9 +32,21 @@ class Particula {
   }
 
   display() {
-    // Establecer el color de la partícula con opacidad basada en su tiempo de vida restante.
+    // Usar lerpColor para interpolar entre amarillo (inicio) y rojo (fin) según la vida restante.
+    let colorInterpolado = lerpColor(
+      this.colorInicial,
+      this.colorFinal,
+      map(this.tVida, 0, 100, 1, 0)
+    );
+
+    // Establecer el color interpolado con opacidad basada en el tiempo de vida restante.
     let alpha = map(this.tVida, 0, 100, 0, 255); // Transparencia entre 0 y 255.
-    fill(red(this.color), green(this.color), blue(this.color), alpha);
+    fill(
+      red(colorInterpolado),
+      green(colorInterpolado),
+      blue(colorInterpolado),
+      alpha
+    );
 
     noStroke(); // Sin borde para darle una apariencia suave.
 
